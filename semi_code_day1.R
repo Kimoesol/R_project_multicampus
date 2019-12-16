@@ -1,0 +1,7 @@
+setwd("C:/Rstudy/세미프로젝트")
+library(xlsx)
+data <- read.csv("전국도서관표준데이터.csv")
+names(data)
+library(dplyr)
+시군구 = data %>% group_by(시군구명) %>% filter(시도명=="서울특별시") %>% filter(도서관유형=="공공도서관"|도서관유형=="작은도서관") %>% summarise(n=n())
+View(시군구)
