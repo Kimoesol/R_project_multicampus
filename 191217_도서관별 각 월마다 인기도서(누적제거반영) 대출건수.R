@@ -161,3 +161,38 @@ for (i in 1:11) {
 str(res_list_new)
 
 # 달빛마루도서관의 누적 대출건수 문제를 해소한 2018년 자료
+
+sb_lib_list2 = list()
+num=0
+for (lib_tmp in 1:length(res_list_all)) {
+  # 성북구 내 도서관 1개 변수에 할당
+  bf <- res_list_all[[lib_tmp]]
+  num=num+1
+  
+  
+  res_list_new = list()
+  cnt = 1
+  for (i in 1:11) {
+    cnt = cnt + 1
+    temp_list_2 = bf[[i+1]]
+    temp_list_1 = bf[[i]]
+    
+    for (idx in 1:length(temp_list_2$대출건수)) {
+      if (temp_list_2$도서명[idx] %in% temp_list_1$도서명) {
+        temp_list_2$도서명<-as.vector(temp_list_2$도서명)
+        bf[[i]]$도서명<-as.vector(bf[[i]]$도서명)
+        temp_list_2$대출건수[idx] = 
+          temp_list_2$대출건수[idx] -
+          bf[[i]]$대출건수[bf[[i]]$도서명==temp_list_2$도서명[idx]]
+        
+      }
+    }
+    
+    tmp_res_df = data.frame( 도서명 = temp_list_2$도서명, 대출건수 = temp_list_2$대출건수 )
+    
+    res_list_new[[ names(bf)[cnt] ]] = tmp_res_df
+  }
+  sb_lib_list2[[ names(res_list_all)[num] ]] = res_list_new
+}
+
+# saveRDS(sb_lib_list2, file = 'sb_lib_list2.rds')
