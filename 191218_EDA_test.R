@@ -57,7 +57,41 @@ for (i in 1:11) {
   # d = c(d, as.data.frame(b[2*i-1], b[2*i]))
 }
 View(b)
-b$도서명
+class(b)
+b
+
+list_data = list()
+for (i in 1:length(b)) {
+  list_data[[i]] = b[[i]]
+  # if (i %% 10 == 0) {
+  #   cat(i,"번째 출력중",'\n')
+  # }
+}
+class(list_data)
+
+
+for (i in 1:length(b)) {
+  if (i %% 2 == 1) {
+    names(list_data[[i]]) = as.vector(names(sb_lib_list2))[i]
+  }
+}
+
+g = c()
+for (i in 1:length(names(sb_lib_list2))) {
+  g = c(g, names(sb_lib_list2)[i])
+}
+
+h = c()
+for (i in 1:length(g)) {
+  h = c(h, paste0(g[i]," ","도서명"))
+  h = c(h, paste0(g[i]," ","대출건수"))
+}
+
+h
+
+names(list_data) = h
+
+View(list_data)
 
 
 
