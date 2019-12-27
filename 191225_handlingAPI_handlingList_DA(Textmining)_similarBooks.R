@@ -36,7 +36,7 @@ any(is.na(c(pop_books, pop_ISBN, pop_addNum, pop_classNum)))  # 정상이면 Fal
 
 
 # 2. 2019년_11월_아리랑어린이도서관 장서/대출 데이터 로드 & 전처리 및 확인
-## load columns : 도서명, ISBN, 부가기호, 주제분류, 도서권수, 대출건수
+## load columns : 도서명, ISBN, 부가기호, 주제분류번호, 도서권수, 대출건수 
 ## 도서권수 0인 도서(독본) 제외, 아동도서(부가기호 7)만 추출, 대출건수 0만 추출
 lib_df = read.csv('아리랑어린이도서관 장서 대출목록 (2019년 11월).csv',
                   stringsAsFactors=F )[c(2, 6, 8, 10, 11, 12)]
